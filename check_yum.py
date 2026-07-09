@@ -327,7 +327,7 @@ class YumTester(object):
            not ("Setting up repositories" in output2[0] or \
                 "Loaded plugins: " in output2[0] or \
                 "Last metadata expiration check" in output2[0] or \
-                "Updating Subscription Management repositories" in output2[0] or \
+                "Subscription Management repositories" in output2[0] or \
                 re.search(r'Loading\s+".+"\s+plugin', output2[0]))):
             end(WARNING, "Yum output signature does not match current known format. " + support_msg)
         num_packages = 0
@@ -435,7 +435,7 @@ class YumTester(object):
                 num_total_updates = 0
                 # this will be updated to num non-excluded lines further down
                 num_security_updates = 0
-            elif os.path.exists(DNF) and re.match('Updating Subscription Management repositories.', ''.join(output)):
+            elif os.path.exists(DNF) and re.search('Subscription Management repositories.', ''.join(output)):
                 using_dnf = True
                 (num_security_updates, num_total_updates) = self.yum_updateinfo()
             # for CloudLinux distro
